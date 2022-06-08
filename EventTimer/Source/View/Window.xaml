@@ -1,0 +1,55 @@
+﻿<Window x:Class="EventTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EventTimer" xmlns:view="clr-namespace:EventTimer.Source.View"
+        mc:Ignorable="d"
+        Title="Event Timer by Pyperdok" 
+        SizeToContent="WidthAndHeight"
+        SnapsToDevicePixels="True"
+        MaxWidth="800"
+        MaxHeight="500"
+        MinWidth="450"
+        WindowStartupLocation="CenterScreen" 
+        SizeChanged="Window_SizeChanged"
+        Name="W_MainWindow">
+    <Window.Resources>
+        <ResourceDictionary Source="ViewStyles.xaml" />
+    </Window.Resources>
+    <Grid Background="DarkGray" Width="Auto" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Name="RD_Header" Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Name="RD_Footer" Height="Auto" MinHeight="45"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="Config">
+                <MenuItem Click="MI_Load_Click" Header="Load" />
+                <MenuItem Click="MI_Save_Click" Header="Save" />
+            </MenuItem>
+            <MenuItem Click="MI_About_Click" Header="About"/>
+        </Menu>
+        <ScrollViewer Name="SV_Panel" MaxHeight="400" SizeChanged="Window_SizeChanged" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel Height="Auto" Name="ST_Timers">
+                <view:ViewEventTimer/>
+                <view:ViewEventTimer/>
+                <view:ViewEventTimer/>
+            </StackPanel>
+        </ScrollViewer>
+        <Border Background="Yellow" Panel.ZIndex="-1"/>
+        <Button 
+                        FontSize="30" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Lime" 
+                        Foreground="White" 
+                        Template="{StaticResource BT_CircleButton}" 
+                        Name="BT_AddTimer" Click="BT_AddTimer_Click" 
+                        Content="+"
+                        MinWidth="45"
+                        Grid.Row="2"
+                />
+    </Grid>
+</Window>

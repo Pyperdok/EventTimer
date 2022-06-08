@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="EventTimer.EventOverlayTimer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EventTimer"
+             mc:Ignorable="d" >
+
+    <Viewbox MinHeight="10" Stretch="Uniform">
+        <DockPanel>
+            <Image Name="IMG_Icon" Stretch="Fill" MaxHeight="50" Source="/Icons/XMissing.png" />
+            <TextBlock TextAlignment="Center" LineStackingStrategy="BlockLineHeight" LineHeight="50" Margin="10,0,10,0" Foreground="White" x:Name="TB_Timer" Text="000:00" FontSize="50" FontWeight="Bold"/>
+            
+            <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="50" MaxWidth="400" Foreground="White" x:Name="TB_TimerDesc" FontSize="50" Text="Decisive Strike" FontWeight="Bold" FontStyle="Italic"/>
+        </DockPanel>
+    </Viewbox>
+</UserControl>
