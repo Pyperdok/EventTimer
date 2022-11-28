@@ -109,6 +109,7 @@ namespace EventTimer
             SetWindowsHookEx(HookType.Keyboard, hook, IntPtr.Zero, 0);
             SetWindowsHookEx(HookType.Mouse, hook, IntPtr.Zero, 0);
             Console.WriteLine("Hooks are setted");
+            Console.WriteLine($"My MainWindow: {Current.MainWindow?.IsVisible}");
             _overlayEventLog.Show();
         }
     }

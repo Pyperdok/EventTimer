@@ -72,6 +72,8 @@ namespace EventTimer
 
         private void Overlay_EventLog_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            GR_EventOverlay.MaxWidth = Overlay_EventLog.Width;
+            ST_EventOverlay.MaxWidth = Overlay_EventLog.Width;
             MinHeight = ST_EventOverlay.ActualHeight;
             MaxHeight = ST_EventOverlay.ActualHeight;
         }

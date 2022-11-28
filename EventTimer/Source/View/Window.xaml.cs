@@ -39,19 +39,24 @@ namespace EventTimer
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {       
+        {
             double height = SV_Panel.ActualHeight + RD_Header.ActualHeight + RD_Footer.MinHeight + BT_AddTimer.ActualHeight;
             (MinHeight, MaxHeight) = (height, height);
         }
 
         private void MI_Save_Click(object sender, RoutedEventArgs e)
         {
-            string json = "["; //ХУЙНЯ
+            var x = App._overlayEventLog.Left;
+            var y = App._overlayEventLog.Top;
+            var w = App._overlayEventLog.Width;
+            Console.WriteLine($"X:{x} Y:{y} W: {w}");
+
+            string json = $"{{\"x\": {x}, \"y\": {y}, \"w\": {w}, \"binds\": ["; //ХУЙНЯ
             foreach (var bind in App._binds) {
                 json += bind + ",\n";
             }
             json = json.TrimEnd(',', '\n');
-            json += "]"; //ХУЙНЯ
+            json += "]}"; //ХУЙНЯ
 
             if (_saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -85,8 +90,14 @@ namespace EventTimer
                 JsonDocument json = JsonDocument.Parse(raw);
                 App._binds.Clear();
                 ST_Timers.Children.Clear();
+                var x = json.RootElement.GetProperty("x").GetDouble();
+                var y = json.RootElement.GetProperty("y").GetDouble();
+                var w = json.RootElement.GetProperty("w").GetDouble();
+                App._overlayEventLog.Left = x;
+                App._overlayEventLog.Top = y;
+                App._overlayEventLog.Width = w;
 
-                foreach(var bind in json.RootElement.EnumerateArray()) //ХУЙНЯ
+                foreach (var bind in json.RootElement.GetProperty("binds").EnumerateArray()) //ХУЙНЯ
                 {
                     var viewBind = new ViewEventTimer();
                     viewBind.TB_Timer.Text = bind.GetProperty("seconds").GetInt32().ToString(); //ХУЙНЯ
